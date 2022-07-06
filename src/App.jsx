@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className='bg-primary min-h-screen'>
-      <div className="container mx-auto">
+      <div className="container mx-auto px-5">
         <Navbar/>
         <div className="my-4 py-3 w-full border-y-[1px] border-y-secondary">
           <BreadCrumbs className='my-4' links={TEMPORARY_BREAD_CRUMBS_LINKS}/>
@@ -35,8 +35,8 @@ function App() {
         <article className='pb-20 border-b-2 border-secondary'>
           {isLoading ? <TemplateArticle/> : (
             <>
-              <div className='flex gap-6 mt-5'>
-                <div className="flex flex-col h-[500px] flex-1">
+              <div className='flex lg:flex-row flex-col gap-6 mt-5'>
+                <div className="flex order-2 lg:order-1 flex-col h-[400px] lg:h-[500px] lg:flex-1">
                   <header className='w-2/3 text-secondary py-3 flex items-end justify-between'>
                     <h3 className='text-2xl'>Video</h3>
                     <a href='/' className='text-sm'>Browse All Videos</a>
@@ -65,41 +65,31 @@ function App() {
                       )
                     })}
                     <Upload Icon={BiUpArrowAlt}>
-                      <p>Upload</p>
-                      <p className='leading-3'>Your Own Video</p>
+                      <p className='text-sm lg:text-base'>Upload</p>
+                      <p className='text-xs leading-3'>Your Own Video</p>
                     </Upload>
                   </div>
                 </div>
-                <div className='w-4/12 border-b-[1px] overflow-hidden border-b-secondary'>
+                <div className='order-1 lg:order-2 lg:w-4/12 border-b-[1px] overflow-hidden border-b-secondary'>
                   <header className='text-secondary border-b-secondary py-3 border-b-2 flex items-end justify-between'>
                     <h3 className='text-2xl'>Activity</h3>
                     <BreadCrumbs links={['View timeline', 'Filter activities']}/>
                   </header>
-                  <div className='py-3  h-[440px] overflow-y-scroll flex flex-col gap-4 text-secondary'>
-                    {isLoading ? 
-                      (
-                        <>
-                          <ActivityContent/>
-                          <ActivityContent/>
-                          <ActivityContent/>
-                          <ActivityContent/>
-                          <ActivityContent/>
-                        </>
-                      ) 
-                      : 
-                      news.map((item,idx)=>(
-                        <ActivityContent 
-                          author={item.author}
-                          desc={item.description}
-                          bgImage={item.urlToImage}/>
-                      ))}
-                    <ActivityContent/>
+                  <div className='py-3 h-[440px] overflow-y-scroll flex flex-col gap-2 pr-1 text-secondary'>
+                    {news.map((item,idx)=>(
+                      <ActivityContent 
+                        author={item.author}
+                        desc={item.description}
+                        bgImage={item.urlToImage}
+                      />
+                      )
+                    )}
                   </div>
                 </div>
               </div>
-              <div className='flex gap-6 mt-5'>
-                <div className='flex-1'>
-                  <div className="flex flex-col h-[500px]">
+              <div className='flex flex-col lg:flex-row gap-6 mt-5'>
+                <div className='flex-1 order-2 lg:order-1'>
+                  <div className="flex flex-col h-[400px] lg:h-[500px]">
                     <header className='w-2/3 text-secondary py-3 flex items-end justify-between'>
                       <h3 className='text-2xl'>People</h3>
                       <a href='/' className='text-sm'>View All</a>
@@ -127,15 +117,15 @@ function App() {
                         views={2534}
                       />
                       <Upload Icon={BiUpArrowAlt}>
-                        <p>Upload</p>
-                        <p className='leading-3'>Your Own Video</p>
+                        <p className='text-sm lg:text-base'>Upload</p>
+                        <p className='text-xs leading-3'>Your Own Video</p>
                       </Upload>
                     </div>
                   </div>
-                  <div className="flex flex-col h-[500px] flex-1">
+                  <div className="flex flex-col h-[400px] lg:h-[500px] flex-1">
                     <header className='w-2/3 text-secondary py-3 flex items-end justify-between'>
-                      <h3 className='text-2xl'>People</h3>
-                      <a href='/' className='text-sm'>View All</a>
+                      <h3 className='text-2xl'>Documents</h3>
+                      <a href='/' className='text-sm'>Browse all documents</a>
                     </header>
                     <div className="grid grid-rows-3 grid-cols-3 gap-2 flex-1">
                       <Feed 
@@ -160,13 +150,13 @@ function App() {
                         views={2534}
                       />
                       <Upload Icon={BiUpArrowAlt}>
-                        <p>Upload</p>
-                        <p className='leading-3'>Your Own Video</p>
+                        <p className='text-sm lg:text-base'>Upload</p>
+                        <p className='text-xs leading-3'>Your Own Video</p>
                       </Upload>
                     </div>
                   </div>
                 </div>
-                <div className='w-4/12 border-b-secondary'>
+                <div className='order-1 lg:order-2 w-full lg:w-4/12 border-b-secondary'>
                   <header className='text-secondary border-b-secondary py-3 border-b-2 flex items-end justify-between'>
                     <h3 className='text-2xl'>Channel</h3>
                     <BreadCrumbs links={['Browse All Channels ']}/>

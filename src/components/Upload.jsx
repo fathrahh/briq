@@ -8,7 +8,7 @@ const Upload = ({Icon, children}) => {
             type="file" />
         <div className='flex items-center gap-2 '>
             <div className='w-8 h-8 flex justify-center items-center rounded-full border-2 border-secondary'>
-                <Icon size={12}/>
+                <Icon className="w-3 h-3 lg:w-3 lg:h-3"/>
             </div>
             <div className='py-4 -mt-1'>
                 {children}

@@ -13,12 +13,12 @@ const Navbar = () => {
 
   return (
     <nav className='flex items-center justify-between py-5'>
-      <h1 className='text-secondary text-4xl scale-y-110'>
+      <h1 className='text-secondary text-3xl lg:text-4xl lg:scale-y-110'>
         Social
         <span className='text-cream'>Network</span>
       </h1>
-      <div className='flex gap-6'>
-        <div className='flex w-[428px] bg-secondary px-3 py-2'>
+      <div className='gap-6 hidden lg:flex'>
+        <div className='flex lg:w-[428px] bg-secondary px-3 py-2'>
           <input 
             className='placeholder:text-primary font-semibold text-primary outline-none border-none bg-transparent flex-1'
             type="text" 

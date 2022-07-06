@@ -1,4 +1,7 @@
 import React from 'react'
+import { ImCross } from 'react-icons/im'
+
+import styles from '../styles/ActivityContent.module.css'
 
 const ActivityContent = (
     {
@@ -10,7 +13,12 @@ const ActivityContent = (
     }
     ) => {
   return (
-    <div className='flex gap-2'>
+    <div className={`flex gap-2 p-1 relative ${styles['activity-content']}`}>
+        <div className={styles['triangle-wrapper']}>
+            <div className={`${styles['triangle']} text-primary`}>
+                <ImCross className='absolute -right-[9px] -top-2 ' size={8}/>
+            </div>
+        </div>
         <div
             style={{
                 backgroundImage : `url(${bgImage})`,

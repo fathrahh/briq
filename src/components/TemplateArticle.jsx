@@ -3,6 +3,7 @@ import Feed from './Feed'
 import Upload from './Upload'
 import { BiUpArrowAlt } from 'react-icons/bi'
 import BreadCrumbs from './BreadCrumbs'
+import ActivityContent from './ActivityContent'
 
 const TemplateArticle = () => {
   return (
@@ -48,8 +49,12 @@ const TemplateArticle = () => {
         </header>
         <div className='py-3 flex flex-col gap-4'>
           <div className='flex'>
-            <div className=''>
-
+            <div className='py-3  h-[440px] overflow-y-scroll flex flex-col gap-4 text-secondary'>
+              <ActivityContent/>
+              <ActivityContent/>
+              <ActivityContent/>
+              <ActivityContent/>
+              <ActivityContent/>
             </div>
           </div>
         </div>
@@ -126,15 +131,15 @@ const TemplateArticle = () => {
       </div>
       <div className='w-4/12 border-b-[1px] border-b-secondary'>
         <header className='text-secondary border-b-secondary py-3 border-b-2 flex items-end justify-between'>
-          <h3 className='text-2xl'>Activity</h3>
+          <h3 className='text-2xl'>Channel</h3>
           <BreadCrumbs links={['View timeline', 'Filter activities']}/>
         </header>
-        <div className='py-3 flex flex-col gap-4'>
-          <div className='flex'>
-            <div className=''>
-
+        <div className='py-3 grid grid-cols-2 gap-x-3 gap-y-4 border-b-2 border-b-secondary'>
+          {Array(10).fill(undefined).map((_, idx) =>(
+            <div key={idx} className='bg-secondary h-32'>
+              {idx + 1}
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
