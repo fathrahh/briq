@@ -1,0 +1,4 @@
+.bread-crumbs > .bread-crumbs-item:not(:last-child)::after{
+    content: "/";
+    margin-inline: 16px;
+}
