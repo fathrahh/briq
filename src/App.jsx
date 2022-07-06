@@ -17,10 +17,15 @@ function App() {
 
   useEffect(()=>{
     const fetcher = async () => {
-      const res = await fetch(BASE_URL_NEWS_API + "top-headlines?country=id&apiKey=" + API_KEY)
-      const { articles } = await res.json()
-      setNews(articles)
-      setIsLoading(false)
+      try{
+        const res = await fetch(BASE_URL_NEWS_API + "top-headlines?country=id&apiKey=" + API_KEY)
+        const { articles } = await res.json()
+        setNews(articles)
+        setIsLoading(false)
+      }catch(err){
+        console.log('Masukan API KEY')
+        setIsLoading(true)
+      }
     }
     fetcher()
   },[])
@@ -36,7 +41,7 @@ function App() {
           {isLoading ? <TemplateArticle/> : (
             <>
               <div className='flex lg:flex-row flex-col gap-6 mt-5'>
-                <div className="flex order-2 lg:order-1 flex-col h-[400px] lg:h-[500px] lg:flex-1">
+                <div className="flex order-2 lg:order-1 flex-col h-[400px] lg:h-[600px] lg:flex-1">
                   <header className='w-2/3 text-secondary py-3 flex items-end justify-between'>
                     <h3 className='text-2xl'>Video</h3>
                     <a href='/' className='text-sm'>Browse All Videos</a>
@@ -70,12 +75,12 @@ function App() {
                     </Upload>
                   </div>
                 </div>
-                <div className='order-1 lg:order-2 lg:w-4/12 border-b-[1px] overflow-hidden border-b-secondary'>
+                <div className='order-1 lg:order-2 lg:w-4/12 border-b-[1px] overflow-hidden '>
                   <header className='text-secondary border-b-secondary py-3 border-b-2 flex items-end justify-between'>
                     <h3 className='text-2xl'>Activity</h3>
                     <BreadCrumbs links={['View timeline', 'Filter activities']}/>
                   </header>
-                  <div className='py-3 h-[440px] overflow-y-scroll flex flex-col gap-2 pr-1 text-secondary'>
+                  <div className='py-3 h-[530px] overflow-y-scroll flex flex-col gap-2 pr-1 border-b-secondary border-2 text-secondary'>
                     {news.map((item,idx)=>(
                       <ActivityContent 
                         author={item.author}
@@ -89,7 +94,7 @@ function App() {
               </div>
               <div className='flex flex-col lg:flex-row gap-6 mt-5'>
                 <div className='flex-1 order-2 lg:order-1'>
-                  <div className="flex flex-col h-[400px] lg:h-[500px]">
+                  <div className="flex flex-col h-[400px] lg:h-[600px] lg:flex-1">
                     <header className='w-2/3 text-secondary py-3 flex items-end justify-between'>
                       <h3 className='text-2xl'>People</h3>
                       <a href='/' className='text-sm'>View All</a>
@@ -122,7 +127,7 @@ function App() {
                       </Upload>
                     </div>
                   </div>
-                  <div className="flex flex-col h-[400px] lg:h-[500px] flex-1">
+                  <div className="flex flex-col h-[400px] lg:h-[600px] lg:flex-1">
                     <header className='w-2/3 text-secondary py-3 flex items-end justify-between'>
                       <h3 className='text-2xl'>Documents</h3>
                       <a href='/' className='text-sm'>Browse all documents</a>
