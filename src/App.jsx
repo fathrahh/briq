@@ -22,7 +22,7 @@ function App() {
         const res = await fetch(BASE_URL_NEWS_API + "top-headlines?country=id&apiKey=" + API_KEY)
         const { articles } = await res.json()
         setNews(articles)
-        // setIsLoading(false)
+        setIsLoading(false)
       }catch(err){
         console.log('Masukan API KEY')
         setIsLoading(true)
