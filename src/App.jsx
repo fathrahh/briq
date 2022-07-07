@@ -8,8 +8,9 @@ import Upload from './components/Upload'
 import TemplateArticle from './components/TemplateArticle'
 import ActivityContent from './components/ActivityContent'
 import Footer from './components/Footer'
+import ChannelCard from './components/ChannelCard'
 
-import { API_KEY, BASE_URL_NEWS_API, TEMPORARY_BREAD_CRUMBS_LINKS } from './utils/const'
+import { API_KEY, BASE_URL_NEWS_API, TEMPLATE_CHANNELS_ITEMS_LABEL, TEMPORARY_BREAD_CRUMBS_LINKS } from './utils/const'
 
 function App() {
   const [news, setNews] = useState([])
@@ -21,7 +22,7 @@ function App() {
         const res = await fetch(BASE_URL_NEWS_API + "top-headlines?country=id&apiKey=" + API_KEY)
         const { articles } = await res.json()
         setNews(articles)
-        setIsLoading(false)
+        // setIsLoading(false)
       }catch(err){
         console.log('Masukan API KEY')
         setIsLoading(true)
@@ -167,11 +168,9 @@ function App() {
                     <BreadCrumbs links={['Browse All Channels ']}/>
                   </header>
                   <div className='py-3 grid grid-cols-2 gap-x-3 gap-y-4 border-b-2 border-b-secondary'>
-                      {Array(10).fill(undefined).map((_, idx) =>(
-                        <div key={idx} className='bg-secondary h-32'>
-                          {idx + 1}
-                        </div>
-                      ))}
+                    {TEMPLATE_CHANNELS_ITEMS_LABEL.map((label, idx) =>(
+                      <ChannelCard key={idx} label={label}/>
+                    ))}
                   </div>
                 </div>
               </div>

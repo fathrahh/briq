@@ -6,11 +6,11 @@ const Upload = ({Icon, children}) => {
         <input 
             className="absolute -z-1 w-0 h-0" 
             type="file" />
-        <div className='flex items-center gap-2 '>
+        <div className='flex flex-col lg:flex-row lg:items-center gap-2 '>
             <div className='w-8 h-8 flex justify-center items-center rounded-full border-2 border-secondary'>
                 <Icon className="w-3 h-3 lg:w-3 lg:h-3"/>
             </div>
-            <div className='py-4 -mt-1'>
+            <div className='lg:py-4 -mt-1'>
                 {children}
             </div>
         </div>
