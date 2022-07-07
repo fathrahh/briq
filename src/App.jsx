@@ -10,7 +10,7 @@ import ActivityContent from './components/ActivityContent'
 import Footer from './components/Footer'
 import ChannelCard from './components/ChannelCard'
 
-import { API_KEY, BASE_URL_NEWS_API, TEMPLATE_CHANNELS_ITEMS_LABEL, TEMPORARY_BREAD_CRUMBS_LINKS } from './utils/const'
+import { API_KEY, BASE_URL_JSON_PLACEHOLDERS, BASE_URL_NEWS_API, DOCUMENT_LIST_FEEDS_ITEMS, PEOPLE_LIST_FEEDS_ITEMS, TEMPLATE_CHANNELS_ITEMS_LABEL, TEMPORARY_BREAD_CRUMBS_LINKS } from './utils/const'
 
 function App() {
   const [news, setNews] = useState([])
@@ -19,12 +19,16 @@ function App() {
   useEffect(()=>{
     const fetcher = async () => {
       try{
-        const res = await fetch(BASE_URL_NEWS_API + "top-headlines?country=id&apiKey=" + API_KEY)
-        const { articles } = await res.json()
-        setNews(articles)
+        // const res = await fetch(BASE_URL_NEWS_API + "top-headlines?country=id&apiKey=" + API_KEY)
+        // const { articles } = await res.json()
+        const res = await fetch(BASE_URL_JSON_PLACEHOLDERS)
+        const data = await res.json()
+        setNews(data)
+        console.log(data)
         setIsLoading(false)
       }catch(err){
-        console.log('Masukan API KEY')
+        console.log(err)
+        // console.log('Masukan API KEY')
         setIsLoading(true)
       }
     }
@@ -53,10 +57,10 @@ function App() {
                         return (
                           <Feed 
                             key={news[idx].title}
-                            bgImage={news[idx].urlToImage ? news[idx].urlToImage : undefined}
+                            bgImage={news[idx].url}
                             className='col-span-2 row-span-2'
                             title={news[idx].title}
-                            author={news[idx].author ? news[idx].author : "John Doe"} 
+                            author={PEOPLE_LIST_FEEDS_ITEMS[idx].author} 
                             views={20000}
                             />
                             )
@@ -64,8 +68,8 @@ function App() {
                       return (
                         <Feed
                           key={news[idx].title} 
-                          bgImage={news[idx].urlToImage ? news[idx].urlToImage : undefined}
-                          author={news[idx].author ? news[idx].author : "John Doe"} 
+                          bgImage={news[idx].url}
+                          author={PEOPLE_LIST_FEEDS_ITEMS[idx].author} 
                           views={20000}
                         />
                       )
@@ -82,11 +86,10 @@ function App() {
                     <BreadCrumbs links={['View timeline', 'Filter activities']}/>
                   </header>
                   <div className='py-3 h-[530px] overflow-y-scroll flex flex-col gap-2 pr-1 border-b-secondary border-2 text-secondary'>
-                    {news.map((item,idx)=>(
+                    {new Array(10).fill(undefined).map((item,idx)=>(
                       <ActivityContent 
-                        author={item.author}
-                        desc={item.description}
-                        bgImage={item.urlToImage}
+                        desc={news[idx].title}
+                        bgImage={news[idx].url}
                       />
                       )
                     )}
@@ -101,27 +104,25 @@ function App() {
                       <a href='/' className='text-sm'>View All</a>
                     </header>
                     <div className="grid grid-rows-3 grid-cols-3 gap-2 flex-1">
-                      <Feed 
-                        className='col-span-2 row-span-2'
-                        title="How to improve your skills" 
-                        author="Waseem Arshad"
-                        views={1999999}/>
-                      <Feed
-                        author="Michael knilph"
-                        views={15454}
-                      />
-                      <Feed
-                        author="Ahmed Yasin"
-                        views={1964}
-                      />
-                      <Feed
-                        author="John Stainior"
-                        views={2534}
-                      />
-                      <Feed
-                        author="John doe"
-                        views={2534}
-                      />
+                    {PEOPLE_LIST_FEEDS_ITEMS.map((item,idx)=>{
+                      if(item.title){
+                        return (
+                          <Feed 
+                            className='col-span-2 row-span-2'
+                            title={item.title}
+                            bgImage={news[idx].url}
+                            author={item.author}
+                            views={item.views}
+                            />
+                            )
+                          }
+                        return(
+                          <Feed
+                          author={item.author}
+                          bgImage={news[idx].url}
+                          />
+                          )
+                        })}
                       <Upload Icon={BiUpArrowAlt}>
                         <p className='text-sm lg:text-base'>Upload</p>
                         <p className='text-xs leading-3'>Your Own Video</p>
@@ -134,27 +135,27 @@ function App() {
                       <a href='/' className='text-sm'>Browse all documents</a>
                     </header>
                     <div className="grid grid-rows-3 grid-cols-3 gap-2 flex-1">
-                      <Feed 
-                        className='col-span-2 row-span-2'
-                        title="How to improve your skills" 
-                        author="Waseem Arshad"
-                        views={1999999}/>
-                      <Feed
-                        author="Michael knilph"
-                        views={15454}
-                      />
-                      <Feed
-                        author="Ahmed Yasin"
-                        views={1964}
-                      />
-                      <Feed
-                        author="John Stainior"
-                        views={2534}
-                      />
-                      <Feed
-                        author="John doe"
-                        views={2534}
-                      />
+                    {DOCUMENT_LIST_FEEDS_ITEMS.map((item,idx)=>{
+                        if(item.title){
+                          return (
+                            <Feed 
+                              className='col-span-2 row-span-2'
+                              title={item.title} 
+                              author={item.author}
+                              views={item.views}
+                              bgImage={news[idx].url}
+                              />
+                              )
+                            }
+                          return (
+                          <Feed
+                            bgImage={news[idx].url}
+                            author={item.author}
+                            views={item.views}
+                            viewsCol={true}
+                          />
+                        )
+                      })}
                       <Upload Icon={BiUpArrowAlt}>
                         <p className='text-sm lg:text-base'>Upload</p>
                         <p className='text-xs leading-3'>Your Own Video</p>
@@ -169,7 +170,7 @@ function App() {
                   </header>
                   <div className='py-3 grid grid-cols-2 gap-x-3 gap-y-4 border-b-2 border-b-secondary'>
                     {TEMPLATE_CHANNELS_ITEMS_LABEL.map((label, idx) =>(
-                      <ChannelCard key={idx} label={label}/>
+                      <Feed className='h-32' key={idx} bgImage={news[idx].url} author={label}/>
                     ))}
                   </div>
                 </div>

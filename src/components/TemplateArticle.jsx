@@ -133,7 +133,7 @@ const TemplateArticle = () => {
             </header>
             <div className='py-3 grid grid-cols-2 gap-x-3 gap-y-4 border-b-2 border-b-secondary'>
               {TEMPLATE_CHANNELS_ITEMS_LABEL.map((label, idx) =>(
-                <ChannelCard key={idx} label={label}/>
+                <Feed key={idx} title={label}/>
               ))}
             </div>
           </div>

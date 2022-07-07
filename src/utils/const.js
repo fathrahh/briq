@@ -76,3 +76,5 @@ export const DOCUMENT_LIST_FEEDS_ITEMS = [
 
 export const API_KEY = import.meta.env.VITE_API_KEY;
 export const BASE_URL_NEWS_API = "https://newsapi.org/v2/";
+export const BASE_URL_JSON_PLACEHOLDERS =
+  "https://jsonplaceholder.typicode.com/photos";
